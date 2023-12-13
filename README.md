@@ -30,13 +30,14 @@ secure and convenient experience for all your digital financial needs.
 ## Tasks
 
 - [ ] Create entities
+  - [X] User
   - [ ] Person
   - [ ] Account
   - [ ] Transaction
   - [ ] Role
-- [ ] Manager security authentication mode and access
-  - [ ] Generate JSON Web Token
-  - [ ] Control resources by role 
+- [X] Manager security authentication mode and access
+  - [X] Generate JSON Web Token
+  - [X] Control resources by role 
 - [ ] Create endpoint to create account
 - [ ] Create endpoint to manager account
 - [ ] Create endpoint to make transactions
