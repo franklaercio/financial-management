@@ -32,15 +32,14 @@ secure and convenient experience for all your digital financial needs.
 - [ ] Create entities
   - [X] User
   - [X] Person
-  - [ ] Account
+  - [ ] Card
   - [ ] Transaction
-  - [ ] Role
 - [X] Manager security authentication mode and access
   - [X] Generate JSON Web Token
   - [X] Control resources by role
 - [X] Create endpoint to create person details 
-- [ ] Create endpoint to create account
-- [ ] Create endpoint to manager account
+- [ ] Create endpoint to create card
+- [ ] Create endpoint to manager card
 - [ ] Create endpoint to make transactions
 
 ## Usage - doing
