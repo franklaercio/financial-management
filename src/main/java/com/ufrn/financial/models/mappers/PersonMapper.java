@@ -7,6 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface PersonMapper {
 
@@ -21,6 +23,8 @@ public interface PersonMapper {
 
     @Mapping(target = "cpf", source = "cpf", qualifiedByName = "applyCPFMask")
     PersonDTO modelToDTO(Person person);
+
+    List<PersonDTO> modelsToDTOs(List<Person> persons);
 
     @Named("removeCPFMask")
     default String removeCPFMask(String cpfComMascara) {

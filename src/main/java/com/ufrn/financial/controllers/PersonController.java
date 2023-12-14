@@ -48,18 +48,18 @@ public class PersonController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable @Valid String id) {
         var person = this.personService.findById(UUID.fromString(id));
-        return ResponseEntity.ok(person);
+        return ResponseEntity.ok(mapper.modelToDTO(person));
     }
 
     @GetMapping("/cpf/{cpf}")
     public ResponseEntity<?> findByCpf(@PathVariable @Valid String cpf) {
         var person = this.personService.findByCpf(cpf);
-        return ResponseEntity.ok(person);
+        return ResponseEntity.ok(mapper.modelToDTO(person));
     }
 
     @GetMapping
     public ResponseEntity<?> findAll() {
         var persons = this.personService.findAll();
-        return ResponseEntity.ok(persons);
+        return ResponseEntity.ok(mapper.modelsToDTOs(persons));
     }
 }
