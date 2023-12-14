@@ -2,12 +2,14 @@ package com.ufrn.financial.models;
 
 import com.ufrn.financial.models.enums.UserRoleEnum;
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Table(name = "users")
 @Entity(name = "users")
@@ -16,6 +18,9 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @UuidGenerator
+    private UUID uuid;
 
     private String username;
 
@@ -27,10 +32,30 @@ public class User implements UserDetails {
     public User() {
     }
 
+    public User(UUID uuid) {
+        this.uuid = uuid;
+    }
+
     public User(String username, String password, UserRoleEnum role) {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public void setUsername(String username) {
@@ -47,14 +72,6 @@ public class User implements UserDetails {
 
     public void setRole(UserRoleEnum role) {
         this.role = role;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     @Override

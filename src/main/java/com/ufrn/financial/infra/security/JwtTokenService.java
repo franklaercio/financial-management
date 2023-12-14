@@ -7,10 +7,12 @@ import com.ufrn.financial.models.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Base64;
 
 @Service
 public class JwtTokenService {
@@ -26,20 +28,7 @@ public class JwtTokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("api--secure-wallet")
-                    .withSubject(user.getUsername())
-                    .withExpiresAt(genExpirationDate())
-                    .sign(algorithm);
-        } catch (JWTCreationException ex) {
-            throw new RuntimeException("Error generating token", ex);
-        }
-    }
-
-    public String generateRefreshToken(User user) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            return JWT.create()
-                    .withIssuer("api--secure-wallet")
-                    .withSubject(user.getUsername())
+                    .withSubject(user.getUuid().toString())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException ex) {
