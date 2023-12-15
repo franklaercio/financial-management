@@ -3,6 +3,7 @@ package com.ufrn.financial.models;
 import com.ufrn.financial.models.enums.FlagEnum;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,7 +21,8 @@ public class Card {
 
     private String cvv;
 
-    private String expirationDate;
+    @Column(name = "expiration_date")
+    private LocalDate expirationDate;
 
     @Enumerated(EnumType.STRING)
     private FlagEnum flag;
@@ -35,14 +37,6 @@ public class Card {
     private Set<Transaction> transactions;
 
     public Card() {
-    }
-
-    public Card(String number, String cvv, String expirationDate, FlagEnum flag, Person person) {
-        this.number = number;
-        this.cvv = cvv;
-        this.expirationDate = expirationDate;
-        this.flag = flag;
-        this.person = person;
     }
 
     public UUID getId() {
@@ -61,7 +55,7 @@ public class Card {
         return cvv;
     }
 
-    public String getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
@@ -93,7 +87,7 @@ public class Card {
         this.cvv = cvv;
     }
 
-    public void setExpirationDate(String expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
 

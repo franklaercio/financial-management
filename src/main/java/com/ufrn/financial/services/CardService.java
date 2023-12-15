@@ -6,6 +6,7 @@ import com.ufrn.financial.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,20 +22,25 @@ public class CardService {
     }
 
     @Transactional
-    public Card createCard(Card card, UUID personId) {
-        var person = this.personRepository.findById(personId).orElse(null);
+    public Card createCard(Card card, UUID userId) {
+        var person = this.personRepository.findByUserUuid(userId);
         card.setPerson(person);
+        card.setActive(true);
 
-        return cardRepository.save(card);
+        return this.cardRepository.save(card);
     }
 
     public Card getCardById(UUID id) {
-        return cardRepository.findById(id).orElse(null);
+        return this.cardRepository.findById(id).orElse(null);
+    }
+
+    public List<Card> getAllCardsByPersonId(UUID id) {
+        return this.cardRepository.findAllByPersonId(id);
     }
 
     public void delete(UUID id) {
         var card = this.cardRepository.findById(id).orElse(null);
         card.setActive(false);
-        cardRepository.save(card);
+        this.cardRepository.save(card);
     }
 }

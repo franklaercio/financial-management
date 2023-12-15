@@ -1,13 +1,17 @@
 package com.ufrn.financial.models;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
 @Table(name = "transaction")
 @Entity(name = "transaction")
+@EntityListeners(AuditingEntityListener.class)
 public class Transaction {
 
     @Id
@@ -16,7 +20,8 @@ public class Transaction {
 
     private String description;
 
-    private String date;
+    @CreatedDate
+    private LocalDateTime date;
 
     private BigDecimal value;
 
@@ -30,7 +35,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String description, String date, BigDecimal value) {
+    public Transaction(String description, LocalDateTime date, BigDecimal value) {
         this.description = description;
         this.date = date;
         this.value = value;
@@ -44,7 +49,7 @@ public class Transaction {
         return description;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -60,7 +65,7 @@ public class Transaction {
         this.description = description;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

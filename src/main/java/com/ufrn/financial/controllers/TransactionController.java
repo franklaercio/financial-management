@@ -29,18 +29,18 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid TransactionDTO transactionDTO) {
         var transactionCardId = this.walletService.createTransaction(UUID.fromString(transactionDTO.cardId()), mapper.createToModel(transactionDTO));
-        return ResponseEntity.ok(new TransactionCardDTO(transactionCardId.getId().toString()));
+        return ResponseEntity.ok(new TransactionCardDTO(transactionCardId.getTransaction().getId().toString()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable @Valid String id) {
         var transaction = this.transactionService.findById(UUID.fromString(id));
-        return ResponseEntity.ok(mapper.modelToDTO(transaction));
+        return ResponseEntity.ok(mapper.getTransactionToDTO(transaction));
     }
 
     @GetMapping("/person/{id}")
     public ResponseEntity<?> findAllByPersonId(@PathVariable @Valid String id) {
-        var cards = this.walletService.getTransactionsByCard(UUID.fromString(id));
-        return ResponseEntity.ok(cards);
+        var transactions = this.walletService.getTransactionsByCardId(UUID.fromString(id));
+        return ResponseEntity.ok(mapper.transactionToDTO(transactions));
     }
 }

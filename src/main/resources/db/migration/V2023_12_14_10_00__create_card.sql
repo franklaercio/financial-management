@@ -1,8 +1,9 @@
 CREATE TABLE card(
     id binary(16) default (uuid_to_bin(uuid())) not null primary key,
+    embossing varchar(255) not null,
     number VARCHAR(255) not null,
     cvv VARCHAR(255) not null,
-    expirationDate VARCHAR(255) not null,
+    expiration_date date not null,
     flag varchar(255) not null,
     person_id binary(16) not null,
     active tinyint(1) not null default 1,
