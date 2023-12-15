@@ -1,7 +1,5 @@
 package com.ufrn.financial.controllers;
 
-import com.ufrn.financial.models.Person;
-import com.ufrn.financial.models.User;
 import com.ufrn.financial.models.dtos.PersonDTO;
 import com.ufrn.financial.models.mappers.PersonMapper;
 import com.ufrn.financial.services.PersonService;
